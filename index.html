@@ -1,0 +1,44 @@
+<html lang='es'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>APIGasolineras</title>
+    <link rel='stylesheet' href='style.css'>
+    <script src='script.js'  type="module" defer></script>
+</head>
+
+<body>
+    <nav class="menu-filtros">
+        <form id="form-filtros">
+
+            <!-- Provincia -->
+            <label for="provincia">Provincia:</label>
+            <select id="provincia" name="provincia">
+                <option value="">Seleccione provincia</option>
+                <!-- Opciones añadidas desde API -->
+            </select>
+
+            <!-- Municipio -->
+            <label for="municipio">Municipio:</label>
+            <select id="municipio" name="municipio">
+                <option value="">Seleccione municipio</option>
+                <!-- Opciones añadidas desde API -->
+            </select>
+
+            <!-- Tipo de carburante -->
+            <label for="carburante">Carburante:</label>
+            <select id="carburante" name="carburante">
+                <option value="">Seleccione carburante</option>
+                <!-- Opciones añadidas desde API -->
+            </select>
+
+            <button type="submit">Filtrar</button>
+        </form>
+    </nav>
+
+    <div id="resultado-gasolineras"></div>
+
+</body>
+
+</html>

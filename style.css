@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.menu-filtros {
+    background: #f4f4f4;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+}
+.menu-filtros form {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.menu-filtros label {
+    font-weight: bold;
+}
+.menu-filtros select,
+.menu-filtros button {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #aaa;
+}
+.menu-filtros button {
+    background: #0077ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.menu-filtros button:hover {
+    background: #005fcc;
+}
