@@ -110,6 +110,17 @@ function mostrarGasolineras(lista, carburanteSeleccionado) {
         return;
     }
 
+    // Obtenemos la hora actual en formato HH:mm
+    const ahora = new Date();
+
+    //Ejemplo: 15:30 -> 1530
+    //Hacemos 15 * 100 = 1500
+    //Para “pegar” los minutos después con una suma: 1500 + 30 = 1530
+    const horaActual = ahora.getHours() * 100 + ahora.getMinutes(); 
+    
+    // Checkbox de abiertas
+    const soloAbiertas = document.getElementById("abierta").checked;
+
     lista.forEach(gasolinera => { 
         // Crear Map de carburantes y precios disponibles 
         const mapCarburantes = new Map(); 
@@ -143,6 +154,27 @@ function mostrarGasolineras(lista, carburanteSeleccionado) {
             mapCarburantes.forEach((precio, nombre) => {
                 preciosHTML += `<p>${nombre}: ${precio}</p>`;
             });
+        }
+
+        // -------- FILTRO DE HORARIO --------
+        if (soloAbiertas && gasolinera.Horario) {
+            // Obtenemos la parte del horario después de "L-D: "
+            // Por ejemplo: "L-D: 07:00-16:00" -> "07:00-16:00", o "L-D: 24H" -> "24H"
+            const horario = gasolinera.Horario.split(": ")[1]; 
+            
+            if (horario === "24H") {
+                // Siempre abierta, no hacemos nada porque mostrar estará true si existe el carburante buscado
+                // o si no se está buscando carburante alguno
+            } else {
+                // "07:00-16:00" -> ["07:00", "16:00"]
+                const [inicioStr, finStr] = horario.split("-");
+                const inicio = parseInt(inicioStr.replace(":", ""), 10); // 07:00 -> 700
+                const fin = parseInt(finStr.replace(":", ""), 10);       // 16:00 -> 1600
+
+                if (horaActual < inicio || horaActual > fin) {
+                    mostrar = false; // No mostrar si no está abierta ahora
+                }
+            }4.20
         }
 
         //Siempre que mostrar sea true, se imprime la gasolinera
@@ -205,6 +237,8 @@ document.getElementById("municipio").addEventListener("change", e => {
 });
 
 document.getElementById("carburante").addEventListener("change", actualizarGasolineras);
+
+document.getElementById("abierta").addEventListener("change", actualizarGasolineras);
 
 document.getElementById("resetear")?.addEventListener("click", resetearGasolineras);
 
