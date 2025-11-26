@@ -174,7 +174,7 @@ function mostrarGasolineras(lista, carburanteSeleccionado) {
                 if (horaActual < inicio || horaActual > fin) {
                     mostrar = false; // No mostrar si no está abierta ahora
                 }
-            }4.20
+            }
         }
 
         //Siempre que mostrar sea true, se imprime la gasolinera
@@ -210,7 +210,14 @@ function actualizarGasolineras() {
 }
 
 // 8. RESET
-function resetearGasolineras() {
+function resetear() {
+    document.getElementById("provincia").value = "";
+    const selectMunicipio = document.getElementById("municipio");
+    selectMunicipio.innerHTML = "<option value=''>Seleccione municipio</option>";
+
+    const selectCarburante = document.getElementById("carburante");
+    selectCarburante.innerHTML = "<option value=''>Seleccione carburante</option>";
+    document.getElementById("abierta").checked = false;
     document.getElementById("resultado-gasolineras").innerHTML = "";
     gasolinerasProvincia = [];
     gasolinerasMunicipio = [];
@@ -240,7 +247,7 @@ document.getElementById("carburante").addEventListener("change", actualizarGasol
 
 document.getElementById("abierta").addEventListener("change", actualizarGasolineras);
 
-document.getElementById("resetear")?.addEventListener("click", resetearGasolineras);
+document.getElementById("resetear").addEventListener("click", resetear);
 
 // INICIO
 cargarProvincias();
